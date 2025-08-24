@@ -1,0 +1,17 @@
+{
+  "name": "khaled-hmani-portfolio",
+  "version": "1.0.0",
+  "description": "AI Transformation Project Manager Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "dev": "tailwindcss -i ./input.css -o ./tailwind.css --watch",
+    "build": "tailwindcss -i ./input.css -o ./tailwind.css --minify",
+    "serve": "python3 -m http.server 3000"
+  },
+  "keywords": ["portfolio", "ai", "automation", "project-manager"],
+  "author": "Khaled Hmani",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
