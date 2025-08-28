@@ -433,13 +433,97 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Analytics placeholder (uncomment and configure when needed)
-// function gtag(){dataLayer.push(arguments);}
-// gtag('js', new Date());
-// gtag('config', 'GA_MEASUREMENT_ID', {
-//     page_title: 'Khaled Hmani - AI Transformation Project Manager',
-//     page_location: window.location.href
-// });
+// Google Analytics 4 Enhanced Tracking
+function trackEvent(eventName, parameters = {}) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, parameters);
+    }
+}
+
+// Track user interactions
+document.addEventListener('DOMContentLoaded', () => {
+    // Track email clicks
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+        link.addEventListener('click', () => {
+            trackEvent('email_click', {
+                'event_category': 'contact',
+                'event_label': 'email'
+            });
+        });
+    });
+
+    // Track phone clicks
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => {
+            trackEvent('phone_click', {
+                'event_category': 'contact',
+                'event_label': 'phone'
+            });
+        });
+    });
+
+    // Track LinkedIn clicks
+    document.querySelectorAll('a[href*="linkedin.com"]').forEach(link => {
+        link.addEventListener('click', () => {
+            trackEvent('social_click', {
+                'event_category': 'social',
+                'event_label': 'linkedin'
+            });
+        });
+    });
+
+    // Track GitHub clicks
+    document.querySelectorAll('a[href*="github.com"]').forEach(link => {
+        link.addEventListener('click', () => {
+            trackEvent('social_click', {
+                'event_category': 'social',
+                'event_label': 'github'
+            });
+        });
+    });
+
+    // Track PDF download button
+    document.querySelectorAll('button[onclick*="print"]').forEach(button => {
+        button.addEventListener('click', () => {
+            trackEvent('pdf_download', {
+                'event_category': 'download',
+                'event_label': 'resume_pdf'
+            });
+        });
+    });
+
+    // Track copy button usage
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            trackEvent('copy_contact', {
+                'event_category': 'contact',
+                'event_label': button.getAttribute('data-copy')
+            });
+        });
+    });
+
+    // Track section navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const section = link.getAttribute('href').replace('#', '');
+            trackEvent('section_navigation', {
+                'event_category': 'navigation',
+                'event_label': section
+            });
+        });
+    });
+
+    // Track skills filter usage
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const filter = chip.getAttribute('data-filter');
+            trackEvent('skills_filter', {
+                'event_category': 'interaction',
+                'event_label': filter
+            });
+        });
+    });
+});
 
 // Error handling for production
 window.addEventListener('error', (e) => {
